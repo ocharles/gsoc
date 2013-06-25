@@ -16,5 +16,5 @@ class Review(db.Model):
     date_created = db.Column(db.DateTime, nullable=False)
     date_last_edit = db.Column(db.DateTime)
     edit_count = db.Column(db.Integer, nullable=False, default=0)
-    votes = relationship("Vote")
-    reports = relationship("Report")
+    votes = db.relationship("Vote")
+    reports = db.relationship("Report")
