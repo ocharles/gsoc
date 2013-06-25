@@ -7,10 +7,12 @@ class Review(db.Model):
     id = db.Column(UUID, primary_key=True, 
                    server_default=db.text("uuid_generate_v4()"))
     release_group_id = db.Column(UUID, index=True)
-    author = db.Column(UUID, db.ForeignKey('user.id'), nullable=False)
+    user = db.Column(UUID, db.ForeignKey('user.id'), nullable=False)
     text = db.Column(db.String, nullable=False)
-    created = db.Column(db.DateTime, nullable=False)
-    last_updated = db.Column(db.DateTime)
-    edits = db.Column(db.Integer, nullable=False, default=0)
+    created = db.Column(db.DateTime, nullable=False,
+                        server_default=db.text("now()"))
+    last_updated = db.Column(db.DateTime, server_default=db.text("null"))
+    edits = db.Column(db.Integer, nullable=False,
+                      server_default=db.text("0"))
     votes = db.relationship("Vote")
-    reports = db.relationship("Report")
+    reports = db.relationship("SpamReport")
