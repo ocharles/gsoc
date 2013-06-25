@@ -13,3 +13,9 @@ FlaskUUID(app)
 db = SQLAlchemy(app)
 
 # import modules
+import users
+import reviews
+import reports
+import votes
+
+

@@ -9,7 +9,7 @@ UUID_RE = re.compile(
 class UUIDConverter(BaseConverter):
     
     def __init__(self, url_map, strict=True):
-        super(UUIDConverter, url_map, self).__init__(url_map)
+        super(UUIDConverter, self).__init__(url_map)
         self.strict = strict
     
     def to_python(self, value):
