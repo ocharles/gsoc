@@ -16,4 +16,4 @@ def compute_rating(overall, positive):
         if ratio >= RATIO_PARAM[j]:
             break
                 
-    return rating_ARRAY[i][j]
+    return RATING_ARRAY[i][j]
