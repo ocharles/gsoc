@@ -5,5 +5,9 @@ class User(db.Model):
 
     __tablename__ = 'user'
     
-    id = db.Column(UUID(as_uuid=True), primary_key=True, 
+    id = db.Column(UUID, primary_key=True, 
         server_default=db.text("uuid_generate_v4()"))
+        
+    reviews = db.relationship('Review', backref=db.backref('user'))
+    votes = db.relationship('Vote', backref=db.backref('user'))
+    spam_reports = db.relationship('SpamReport', backref=db.backref('user'))

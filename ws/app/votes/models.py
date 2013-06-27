@@ -4,13 +4,10 @@ from sqlalchemy.dialects.postgresql import UUID
 class Vote(db.Model):
 
     __tablename__ = 'vote'
-    user_id = db.Column(UUID(as_uuid=True), db.ForeignKey('user.id'), primary_key=True)
-    review_id = db.Column(UUID(as_uuid=True), db.ForeignKey('review.id'), primary_key=True)
+    user_id = db.Column(UUID, db.ForeignKey('user.id'), primary_key=True)
+    review_id = db.Column(UUID, db.ForeignKey('review.id'), primary_key=True)
     type = db.Column(db.Integer, nullable=False)
     created = db.Column(db.DateTime, nullable=False, server_default=db.text("now()"))
-            
-    user = db.relationship('User', backref=db.backref('votes', lazy='dynamic'))
-    review = db.relationship('Review', backref=db.backref('votes', lazy='dynamic'))
     
     def __init__(self, user, review, type):
         self.user = user

@@ -1,10 +1,5 @@
-import uuid
-import re
-
 from werkzeug.routing import BaseConverter, ValidationError
-
-UUID_RE = re.compile(
-    r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$')
+from uuid import validate
 
 class UUIDConverter(BaseConverter):
     
@@ -13,16 +8,12 @@ class UUIDConverter(BaseConverter):
         self.strict = strict
     
     def to_python(self, value):
-        if self.strict and not UUID_RE.match(value):
+        if self.strict and not validate(value):
             raise ValidationError()
-
-        try:
-            return uuid.UUID(value)
-        except ValueError:
-            raise ValidationError()
+        return value
 
     def to_url(self, value):
-        return str(value)
+        return value
 
 class FlaskUUID(object):
 
